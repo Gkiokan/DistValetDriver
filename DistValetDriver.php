@@ -30,7 +30,10 @@ class DistValetDriver extends BasicValetDriver
     public function isStaticFile(string $sitePath, string $siteName, string $uri)/*: string|false */
     {
         if (file_exists($staticFilePath = $sitePath . '/dist' . $uri)) {
-            return $staticFilePath;
+            if( is_file($staticFilePath) ) 
+                return $staticFilePath;
+
+            return $staticFilePath . '/index.html';
         }
         return false;
     }
